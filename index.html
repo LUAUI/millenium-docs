@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Millenium UI Docs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: #eee;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #151515;
+            position: fixed;
+            overflow-y: auto;
+            padding: 20px;
+            border-right: 2px solid #272727;
+        }
+
+        .sidebar h2 {
+            color: #56a8ff;
+            font-size: 22px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ccc;
+            padding: 8px 0;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            color: #56a8ff;
+        }
+
+        .content {
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        h1, h2, h3 {
+            color: #56a8ff;
+        }
+
+        pre {
+            background: #1b1b1b;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Millenium UI Docs</h2>
+
+    <a href="#intro">Introducción</a>
+    <a href="#setup">Instalación</a>
+    <a href="#window">Crear Ventana</a>
+    <a href="#tabs">Crear Tabs</a>
+    <a href="#sections">Secciones</a>
+    <a href="#buttons">Botones</a>
+    <a href="#toggles">Toggles</a>
+    <a href="#dropdowns">Dropdowns</a>
+    <a href="#colorpickers">Colorpickers</a>
+</div>
+
+<div class="content">
+
+    <h1 id="intro">📌 Introducción</h1>
+    <p>Millenium UI es una librería avanzada para crear interfaces en Roblox, parecida a Rayfield pero más flexible y modular.</p>
+
+    <h1 id="setup">📦 Instalación</h1>
+    <pre>
+local library = loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/i77lhm/Libraries/refs/heads/main/Millenium/Library.lua"
+))()
+    </pre>
+
+    <h1 id="window">🪟 Crear una ventana</h1>
+    <pre>
+local window = library:window({
+    name = "bronx",
+    suffix = ".lol",
+    gameInfo = "Dupe Tools for Maximum Efficiency"
+})
+    </pre>
+
+    <h1 id="tabs">📁 Crear Tabs</h1>
+    <p>Las tabs se crean igual que Rayfield, pero pueden tener múltiples subpáginas:</p>
+
+    <pre>
+local Tab1, Tab2, Tab3 = window:tab({
+    name = "Players",
+    tabs = {"Enemies", "Teammates", "Self"}
+})
+    </pre>
+
+    <p>Cada variable representa una sub-página dentro de la tab.</p>
+
+    <h2>🔁 Crear el mismo contenido en varias tabs</h2>
+
+    <pre>
+for _, tab in {Tab1, Tab2, Tab3} do
+    local col = tab:column({})
+    local sec = col:section({name = "General"})
+
+    sec:toggle({name = "Enable ESP"})
+    sec:toggle({name = "Through Walls"})
+    sec:button({name = "Refresh"})
+end
+    </pre>
+
+    <h1 id="sections">📦 Secciones</h1>
+
+    <pre>
+local column = Tab1:column({})
+local section = column:section({name = "Ajustes", default = true})
+    </pre>
+
+    <h1 id="buttons">🔘 Botones</h1>
+    <pre>
+section:button({
+    name = "Click Aquí",
+    callback = function()
+        print("Botón presionado")
+    end
+})
+    </pre>
+
+    <h1 id="toggles">✔️ Toggles</h1>
+    <pre>
+section:toggle({
+    name = "Modo Pro",
+    callback = function(state)
+        print("Modo Pro:", state)
+    end
+})
+    </pre>
+
+    <h1 id="dropdowns">📂 Dropdowns</h1>
+    <pre>
+section:dropdown({
+    name = "Selección",
+    items = {"Opción 1", "Opción 2"},
+    default = "Opción 1",
+})
+    </pre>
+
+    <h1 id="colorpickers">🎨 Colorpickers</h1>
+    <pre>
+section:colorpicker({
+    name = "Seleccionar Color",
+})
+    </pre>
+
+</div>
+
+</body>
+</html>
